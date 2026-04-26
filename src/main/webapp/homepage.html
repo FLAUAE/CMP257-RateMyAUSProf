@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/homepage.css">
+    <link rel="icon" type="image/png" href="img/graduation.png">
+    <title>RateMyAUSProf</title>
+</head>
+<body>
+    <div class="container-fluid p-0">
+        <div class="row">
+            <div class="col-12" id="AUS_MainBuilding">
+                <div id="login-area">
+                    <a href="#" class="login-link">log in</a>
+                    <a href="#" class="login-link">sign up</a>
+                    <a href="admin.html" class="login-link" id="admin-dashboard-link">admin dashboard</a>
+                </div>
+                <h1 id="main-title">RATE <span style="font-size: 5vh;">my</span> AUS PROF</h1>
+                <div id="find-button-area">
+                    <a href="#search-sections">
+                        <img src="img/search-button.png" id="find-button" alt="Find Your Professor">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="search-sections" class="container-fluid">
+        <div class="row">
+            <div class="col-12 section-box" id="name-section">
+                <div class="container py-5">
+                    <h2 class="section-title">⌕ Search by Name</h2>
+                    <div id="search-name-area">
+                        <input type="text" id="search-name-box" placeholder="Search for a professor by name">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 section-box" id="department-section">
+            <div class="container py-5">
+                <h2 class="section-title">⌕ Search by Department</h2>
+                <div class="row g-4" id="dept-cards-container">
+                    <div class="col-12 text-center py-4" id="dept-loading">Loading departments…</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer id="main-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 footer-section">
+                    <h4>RateMyAUSProf</h4>
+                    <p>Helping AUS students find and rate professors more easily.</p>
+                </div>
+                <div class="col-md-6 footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="homepage.html">Home</a><br>
+                    <a href="#search-sections">Search</a><br>
+                    <a href="#">Departments</a>
+                </div>
+            </div>
+            <hr>
+            <p id="footer-bottom">&copy; 2026 RateMyAUSProf. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/homepage.js" defer></script>
+</body>
+</html>

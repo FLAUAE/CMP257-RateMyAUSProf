@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/department.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="icon" type="image/png" href="img/graduation.png">
+    <title>RateMyAUSProf — Admin Dashboard</title>
+</head>
+<body>
+
+    <nav id="dept-navbar">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a href="homepage.html" class="navbar-brand-link">
+                <h1 id="navbar-title">RATE <span style="font-size: 1.2rem;">my</span> AUS PROF</h1>
+            </a>
+        </div>
+    </nav>
+
+    <div id="admin-nav">
+        <div class="container">
+            <a href="admin-departments.html" class="admin-nav-link">Manage Departments</a>
+            <a href="admin-professors.html" class="admin-nav-link">Manage Professors</a>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <h2 class="admin-page-title">Welcome to the Admin Dashboard</h2>
+        <p class="admin-subtitle">Use the tools below to manage department and professor data.</p>
+
+        <div class="row g-4 mt-3">
+            <div class="col-md-6">
+                <div class="admin-card">
+                    <h4>Manage Departments</h4>
+                    <p>Add, edit, or remove departments from the system.</p>
+                    <a href="admin-departments.html" class="btn admin-btn">Go to Departments</a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="admin-card">
+                    <h4>Manage Professors</h4>
+                    <p>Add, edit, or remove professors within each department.</p>
+                    <a href="admin-professors.html" class="btn admin-btn">Go to Professors</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer id="main-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 footer-section">
+                    <h4>RateMyAUSProf</h4>
+                    <p>Helping AUS students find and rate professors more easily.</p>
+                </div>
+                <div class="col-md-6 footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="homepage.html">Home</a><br>
+                    <a href="department.html">Departments</a>
+                </div>
+            </div>
+            <hr>
+            <p id="footer-bottom">&copy; 2026 RateMyAUSProf. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
