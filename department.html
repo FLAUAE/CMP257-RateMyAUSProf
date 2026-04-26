@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/department.css">
+    <link rel="icon" type="image/png" href="img/graduation.png">
+    <title>RateMyAUSProf — Department</title>
+</head>
+<body>
+
+    <nav id="dept-navbar">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a href="homepage.html" class="navbar-brand-link">
+                <h1 id="navbar-title">RATE <span style="font-size: 1.2rem;">my</span> AUS PROF</h1>
+            </a>
+            <div id="login-area">
+                <a href="#" class="login-link">log in</a>
+                <a href="#" class="login-link">sign up</a>
+            </div>
+        </div>
+    </nav>
+
+    <div id="dept-header" class="container-fluid">
+        <div class="container py-4">
+            <h2 id="dept-name" class="text-center"></h2>
+        </div>
+    </div>
+
+    <div class="container my-4">
+        <div class="row g-3 mb-4 align-items-end">
+            <div class="col-sm-6 col-md-4">
+                <label for="sort-select" class="form-label">Sort by</label>
+                <select id="sort-select" class="form-select">
+                    <option value="rating-desc">Highest Rating</option>
+                    <option value="rating-asc">Lowest Rating</option>
+                    <option value="reviews-desc">Most Reviewed</option>
+                    <option value="reviews-asc">Least Reviewed</option>
+                </select>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <label for="gender-filter" class="form-label">Filter by Gender</label>
+                <select id="gender-filter" class="form-select">
+                    <option value="all">All</option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="table-responsive d-none d-md-block">
+            <table class="table table-hover align-middle" id="prof-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Professor Name</th>
+                        <th>Gender</th>
+                        <th>Average Rating</th>
+                        <th>Reviews</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="prof-tbody"></tbody>
+            </table>
+        </div>
+
+        <div id="prof-cards" class="d-md-none"></div>
+    </div>
+
+    <footer id="main-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 footer-section">
+                    <h4>RateMyAUSProf</h4>
+                    <p>Helping AUS students find and rate professors more easily.</p>
+                </div>
+                <div class="col-md-6 footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="homepage.html">Home</a><br>
+                    <a href="homepage.html#search-sections">Search</a><br>
+                    <a href="#">Departments</a>
+                </div>
+            </div>
+            <hr>
+            <p id="footer-bottom">&copy; 2026 RateMyAUSProf. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const professors = [
+            { name: "Dr. Fadi Aloul",             gender: "M", dept: "CEN", rating: 4.2, reviews: 34 },
+            { name: "Prof. Gheith Abandah",        gender: "M", dept: "CEN", rating: 3.7, reviews: 52 },
+            { name: "Dr. Jamal El-Din Abdalla",    gender: "M", dept: "CEN", rating: 2.8, reviews: 19 },
+            { name: "Dr. Abed Al-Nasser Abdallah", gender: "M", dept: "CEN", rating: 4.6, reviews: 67 },
+            { name: "Dr. Mamoun Abdel-Hafez",      gender: "M", dept: "CEN", rating: 3.1, reviews: 41 }
+        ];
+
+        const deptNames = {
+            CEN: "College of Engineering (CEN)",
+            SBA: "School of Business Administration (SBA)",
+            CAAD: "College of Architecture, Art and Design (CAAD)"
+        };
+
+        const params = new URLSearchParams(window.location.search);
+        const dept = params.get("dept") || "CEN";
+        document.getElementById("dept-name").textContent = deptNames[dept] || dept;
+        document.title = "RateMyAUSProf — " + (deptNames[dept] || dept);
+
+        function ratingBadge(r) {
+            let cls = "badge-red";
+            if (r >= 4) cls = "badge-green";
+            else if (r >= 3) cls = "badge-yellow";
+            return `<span class="rating-badge ${cls}">${r.toFixed(1)}</span>`;
+        }
+
+        function renderTable(data) {
+            const tbody = document.getElementById("prof-tbody");
+            tbody.innerHTML = data.map((p, i) => `
+                <tr>
+                    <td>${i + 1}</td>
+                    <td>${p.name}</td>
+                    <td>${p.gender === "M" ? "Male" : "Female"}</td>
+                    <td>${ratingBadge(p.rating)}</td>
+                    <td>${p.reviews}</td>
+                    <td><a href="#" class="btn btn-sm btn-view">View</a></td>
+                </tr>
+            `).join("");
+        }
+
+        function renderCards(data) {
+            const container = document.getElementById("prof-cards");
+            container.innerHTML = data.map(p => `
+                <div class="prof-card mb-3 p-3">
+                    <h5 class="mb-1">${p.name}</h5>
+                    <p class="mb-1"><strong>Gender:</strong> ${p.gender === "M" ? "Male" : "Female"}</p>
+                    <p class="mb-1"><strong>Rating:</strong> ${ratingBadge(p.rating)}</p>
+                    <p class="mb-2"><strong>Reviews:</strong> ${p.reviews}</p>
+                    <a href="#" class="btn btn-sm btn-view">View</a>
+                </div>
+            `).join("");
+        }
+
+        function render() {
+            let data = professors.filter(p => p.dept === dept);
+
+            const gender = document.getElementById("gender-filter").value;
+            if (gender !== "all") data = data.filter(p => p.gender === gender);
+
+            const sort = document.getElementById("sort-select").value;
+            if (sort === "rating-desc") data.sort((a, b) => b.rating - a.rating);
+            else if (sort === "rating-asc") data.sort((a, b) => a.rating - b.rating);
+            else if (sort === "reviews-desc") data.sort((a, b) => b.reviews - a.reviews);
+            else if (sort === "reviews-asc") data.sort((a, b) => a.reviews - b.reviews);
+
+            renderTable(data);
+            renderCards(data);
+        }
+
+        document.getElementById("sort-select").addEventListener("change", render);
+        document.getElementById("gender-filter").addEventListener("change", render);
+        render();
+    </script>
+
+</body>
+</html>
